@@ -25,7 +25,7 @@ test("serves an installable stream-only manifest", async () => {
   assert.equal(response.status, 200);
   assert.equal(manifest.id, "com.personal.watchselect.v3");
   assert.equal(manifest.name, "WatchSelect");
-  assert.equal(manifest.version, "2.2.1");
+  assert.equal(manifest.version, "2.2.2");
   assert.deepEqual(manifest.resources, ["stream"]);
   assert.deepEqual(manifest.types, ["movie", "series"]);
   assert.deepEqual(manifest.catalogs, []);
@@ -243,7 +243,7 @@ test("keeps browser destinations as HTTPS when User-Agent is present", async () 
 
   assert.equal(
     streams.find(({ name }) => name === "Netflix").externalUrl,
-    "https://www.netflix.com/watch/81767873",
+    "https://www.netflix.com/title/81767873",
   );
   assert.equal(
     streams.find(({ name }) => name === "Crunchyroll").externalUrl,

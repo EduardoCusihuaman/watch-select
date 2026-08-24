@@ -2,7 +2,7 @@ const WATCHHUB = "https://watchhub.strem.io";
 
 const MANIFEST = {
   id: "com.personal.watchselect.v3",
-  version: "2.2.1",
+  version: "2.2.2",
   name: "WatchSelect",
   description: "Choose your region. Choose your services. Open them from Stremio.",
   resources: ["stream"],
@@ -59,7 +59,9 @@ export function resolveAndroidTv(stream, providerId, resourceId, isAndroidTv) {
 
       return {
         ...stream,
-        externalUrl: isAndroidTv ? androidIntent : stream.androidUrl,
+        externalUrl: isAndroidTv
+          ? androidIntent
+          : `https://www.netflix.com/title/${contentId}`,
         androidUrl: androidIntent,
         androidTvUrl: androidIntent,
       };

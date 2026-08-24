@@ -7,7 +7,8 @@ Netflix, Disney+, and Crunchyroll for Argentina.
 
 WatchHub 1.15 supplies separate Web and Android destinations. Disney's working
 `androidTvUrl` is preserved. Netflix gets a Leanback intent with WatchHub's
-content ID because its default intent only opened the app home. Crunchyroll's
+content ID because its default intent only opened the app home. Netflix Web
+opens the title page instead of the player. Crunchyroll's
 upstream scheme and content ID are preserved while its stale `.MainActivity`
 is replaced with the installed TV app's `.main.ui.MainActivity`. Both intents
 were validated directly through ADB on the target TV. Results are deduplicated
