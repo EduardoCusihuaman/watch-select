@@ -40,10 +40,10 @@ npx wrangler login
 npm run deploy
 ```
 
-Install the resulting URL in Stremio:
+Install the production manifest in Stremio:
 
 ```text
-https://watchselect.<account>.workers.dev/manifest.json
+https://watchselect.luiscusihuaman88.workers.dev/manifest.json
 ```
 
 Netflix, Disney+, and Crunchyroll were smoke-tested on a TCL Android 14 TV with
