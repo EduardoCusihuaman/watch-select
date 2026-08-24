@@ -2,6 +2,8 @@
 
 Choose your region. Choose your services. Open them from Stremio.
 
+The addon manifest includes a dedicated 256x256 transparent PNG logo.
+
 Stremio addon that proxies the official WatchHub stream resource and keeps only
 Netflix, Disney+, and Crunchyroll for Argentina.
 

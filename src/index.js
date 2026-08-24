@@ -2,9 +2,10 @@ const WATCHHUB = "https://watchhub.strem.io";
 
 const MANIFEST = {
   id: "com.personal.watchselect.v3",
-  version: "2.2.2",
+  version: "2.2.3",
   name: "WatchSelect",
   description: "Choose your region. Choose your services. Open them from Stremio.",
+  logo: "https://watchselect.luiscusihuaman88.workers.dev/watch-select-logo.png",
   resources: ["stream"],
   types: ["movie", "series"],
   idPrefixes: ["tt"],

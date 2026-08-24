@@ -25,7 +25,11 @@ test("serves an installable stream-only manifest", async () => {
   assert.equal(response.status, 200);
   assert.equal(manifest.id, "com.personal.watchselect.v3");
   assert.equal(manifest.name, "WatchSelect");
-  assert.equal(manifest.version, "2.2.2");
+  assert.equal(manifest.version, "2.2.3");
+  assert.equal(
+    manifest.logo,
+    "https://watchselect.luiscusihuaman88.workers.dev/watch-select-logo.png",
+  );
   assert.deepEqual(manifest.resources, ["stream"]);
   assert.deepEqual(manifest.types, ["movie", "series"]);
   assert.deepEqual(manifest.catalogs, []);
