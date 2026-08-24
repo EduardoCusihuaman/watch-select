@@ -22,8 +22,8 @@ in `externalUrl`. Browser requests include `User-Agent` and preserve an HTTPS
 WatchHub currently maps `tt30472557` to a Reze Arc trailer. That single title
 is corrected to the verified Crunchyroll movie ID `GMEE00351495DEDE`.
 
-Streams use the neutral label `🇦🇷 Suscripción · Abrir`. Provider logos are
-served by the Worker under `/logos/*.svg` with immutable one-year caching.
+Streams use the provider-specific label `<Provider> · Abrir`. Horizontal 16:9
+provider cards are served under `/logos/*.png` with immutable one-year caching.
 Stremio Web renders these thumbnails; Stremio TV 1.10.4 falls back to the
 provider name and text label.
 

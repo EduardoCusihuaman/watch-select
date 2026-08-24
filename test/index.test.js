@@ -25,7 +25,7 @@ test("serves an installable stream-only manifest", async () => {
   assert.equal(response.status, 200);
   assert.equal(manifest.id, "com.personal.watchselect.v3");
   assert.equal(manifest.name, "WatchSelect");
-  assert.equal(manifest.version, "2.2.0");
+  assert.equal(manifest.version, "2.2.1");
   assert.deepEqual(manifest.resources, ["stream"]);
   assert.deepEqual(manifest.types, ["movie", "series"]);
   assert.deepEqual(manifest.catalogs, []);
@@ -190,13 +190,17 @@ test("filters, preserves, and orders WatchHub streams", async () => {
     body.streams.find(({ name }) => name === "Netflix").externalUrl,
     body.streams.find(({ name }) => name === "Netflix").androidTvUrl,
   );
-  assert.equal(
-    body.streams.find(({ name }) => name === "Netflix").title,
-    "🇦🇷 Suscripción · Abrir",
+  assert.deepEqual(
+    body.streams.map(({ title }) => title),
+    ["Netflix · Abrir", "Disney+ · Abrir", "Crunchyroll · Abrir"],
   );
-  assert.equal(
-    body.streams.find(({ name }) => name === "Netflix").thumbnail,
-    "https://example.com/logos/netflix.svg",
+  assert.deepEqual(
+    body.streams.map(({ thumbnail }) => thumbnail),
+    [
+      "https://example.com/logos/netflix-v2.png",
+      "https://example.com/logos/disney-plus-v2.png",
+      "https://example.com/logos/crunchyroll-v2.png",
+    ],
   );
   assert.equal(
     body.streams.find(({ name }) => name === "Netflix").androidUrl,
@@ -272,20 +276,6 @@ test("does not advertise downstream caching in v1", async () => {
   );
 
   assert.equal(response.headers.get("cache-control"), null);
-});
-
-test("serves provider logos with immutable caching", async () => {
-  const response = await handleRequest(
-    new Request("https://example.com/logos/netflix.svg"),
-  );
-
-  assert.equal(response.status, 200);
-  assert.equal(response.headers.get("content-type"), "image/svg+xml; charset=utf-8");
-  assert.equal(
-    response.headers.get("cache-control"),
-    "public, max-age=31536000, immutable",
-  );
-  assert.match(await response.text(), /<title>Netflix<\/title>/);
 });
 
 test("fails soft when WatchHub fails", async () => {

@@ -2,7 +2,7 @@ const WATCHHUB = "https://watchhub.strem.io";
 
 const MANIFEST = {
   id: "com.personal.watchselect.v3",
-  version: "2.2.0",
+  version: "2.2.1",
   name: "WatchSelect",
   description: "Choose your region. Choose your services. Open them from Stremio.",
   resources: ["stream"],
@@ -12,22 +12,13 @@ const MANIFEST = {
 };
 
 const PROVIDERS = {
-  netflix: { order: 0, name: "Netflix", logo: "/logos/netflix.svg" },
-  disney: { order: 1, name: "Disney+", logo: "/logos/disney-plus.svg" },
+  netflix: { order: 0, name: "Netflix", logo: "/logos/netflix-v2.png" },
+  disney: { order: 1, name: "Disney+", logo: "/logos/disney-plus-v2.png" },
   crunchyroll: {
     order: 2,
     name: "Crunchyroll",
-    logo: "/logos/crunchyroll.svg",
+    logo: "/logos/crunchyroll-v2.png",
   },
-};
-
-const LOGOS = {
-  "/logos/netflix.svg":
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><title>Netflix</title><rect width="24" height="24" rx="4" fill="#141414"/><path fill="#E50914" d="M5.398 0v.006c3.028 8.556 5.37 15.175 8.348 23.596 2.344.058 4.85.398 4.854.398-2.8-7.924-5.923-16.747-8.487-24zm8.489 0v9.63L18.6 22.951c-.043-7.86-.004-15.913.002-22.95zM5.398 1.05V24c1.873-.225 2.81-.312 4.715-.398v-9.22z"/></svg>',
-  "/logos/disney-plus.svg":
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img"><title>Disney+</title><rect width="240" height="240" rx="40" fill="#071A40"/><path d="M45 91c38-53 117-67 159-18" fill="none" stroke="#00B9F2" stroke-width="9" stroke-linecap="round"/><text x="120" y="148" fill="#fff" font-family="Arial,sans-serif" font-size="45" font-weight="700" text-anchor="middle">Disney+</text></svg>',
-  "/logos/crunchyroll.svg":
-    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img"><title>Crunchyroll</title><rect width="24" height="24" rx="4" fill="#fff"/><path fill="#F47521" d="M2.933 13.467a10.55 10.55 0 1 1 21.067-.8V12c0-6.627-5.373-12-12-12S0 5.373 0 12s5.373 12 12 12h.8a10.617 10.617 0 0 1-9.867-10.533zM19.2 14a3.85 3.85 0 0 1-1.333-7.467A7.89 7.89 0 0 0 14 5.6a8.4 8.4 0 1 0 8.4 8.4 6.492 6.492 0 0 0-.133-1.6A3.415 3.415 0 0 1 19.2 14z"/></svg>',
 };
 
 // WatchHub currently resolves this movie to its trailer instead of the film.
@@ -117,16 +108,6 @@ function json(data, status = 200) {
   });
 }
 
-function logo(svg) {
-  return new Response(svg, {
-    headers: {
-      "content-type": "image/svg+xml; charset=utf-8",
-      "access-control-allow-origin": "*",
-      "cache-control": "public, max-age=31536000, immutable",
-    },
-  });
-}
-
 export async function handleRequest(request, fetchImpl = fetch) {
   const url = new URL(request.url);
 
@@ -145,10 +126,6 @@ export async function handleRequest(request, fetchImpl = fetch) {
 
   if (url.pathname === "/manifest.json") {
     return json(MANIFEST);
-  }
-
-  if (LOGOS[url.pathname]) {
-    return logo(LOGOS[url.pathname]);
   }
 
   const resourceMatch = url.pathname.match(
@@ -186,7 +163,7 @@ export async function handleRequest(request, fetchImpl = fetch) {
       found.set(providerId, {
         ...resolved,
         name: PROVIDERS[providerId].name,
-        title: "🇦🇷 Suscripción · Abrir",
+        title: `${PROVIDERS[providerId].name} · Abrir`,
         thumbnail: `${url.origin}${PROVIDERS[providerId].logo}`,
       });
     }
